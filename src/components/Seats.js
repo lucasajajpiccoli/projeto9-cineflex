@@ -10,7 +10,7 @@ import Legend from './Legend';
 import Form from './Form';
 import Footer from './common/Footer';
 
-function Seats() {
+function Seats({order, setOrder}) {
     const {idSessao} = useParams();
 
     const [sessionSeats, setSessionSeats] = useState(null);
@@ -51,6 +51,12 @@ function Seats() {
                     )}
                 </div>
                 <Legend />
+                <Form
+                    order={order}
+                    setOrder={setOrder}
+                    selectedSeats={selectedSeats}
+                    sessionSeats={sessionSeats}
+                />
             </Container>
             <Footer
                title={sessionSeats.movie.title}
@@ -63,7 +69,7 @@ function Seats() {
 }
 
 const Container = styled.div`
-    margin-bottom: 120px;
+    margin-bottom: 140px;
 
     & > div:first-child {
         margin: 0px 6vw 20px 6vw;

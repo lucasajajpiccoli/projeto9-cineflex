@@ -34,9 +34,7 @@ function Time() {
 
     return (
         <>
-            <Title>
-                Selecione o horário
-            </Title>
+            <Title>Selecione o horário</Title>
             <Container>
                 {sessions.days.map((item, index) =>
                     <Day
