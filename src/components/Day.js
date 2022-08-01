@@ -2,12 +2,19 @@ import styled from 'styled-components';
 
 import Horary from './Horary';
 
-function Day () {
+function Day ({sessionDay : {weekday, date, showtimes}}) {
+
     return (
         <Container>
-            <div>Dia</div>
+            <div>{weekday} - {date}</div>
             <div>
-                <Horary />
+                {showtimes.map((item, index) =>
+                    <Horary
+                        key={index}
+                        position={index}
+                        sessionTime={item}
+                    />
+                )}
             </div>
         </Container>
     );
@@ -25,6 +32,12 @@ const Container = styled.div`
         font-size: 20px;
         line-height: 23px;
         color: #293845;
+    }
+
+    & > div:last-child {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
     }
 `;
 

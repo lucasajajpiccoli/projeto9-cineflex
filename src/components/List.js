@@ -2,23 +2,24 @@ import { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
-import Title from './common/Title';
 import Loading from './common/Loading';
+import Title from './common/Title';
 import Poster from './Poster';
 
 function List () {
     const [movies, setMovies] = useState(null);
 
-    useEffect(() => {
-        const promise = axios.get(
-            "https://mock-api.driven.com.br/api/v7/cineflex/movies"
-        );
-        promise.then(
-            (response) => {
-                setMovies(response.data);
-            }
-        );
-    }, []);
+    useEffect(
+        () => {
+            const promise = axios.get(
+                "https://mock-api.driven.com.br/api/v7/cineflex/movies"
+            );
+            promise.then(
+                (response) => {
+                    setMovies(response.data);
+                }
+            );
+        }, []);
 
     if (movies === null) {
         return (

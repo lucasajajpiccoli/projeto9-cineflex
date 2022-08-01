@@ -25,6 +25,7 @@ time, mark, audio, video {
     font-family: 'Roboto', sans-serif;
 	vertical-align: baseline;
 	background-color: #FFFFFF;
+	text-decoration: none;
 }
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
