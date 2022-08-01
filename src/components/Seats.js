@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Seat from './Seat';
 import Legend from './Legend';
-import From from './Form';
+import Form from './Form';
 import Footer from './common/Footer';
 
 function Seats() {

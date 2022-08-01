@@ -1,6 +1,6 @@
-import { Fragment } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import "../styles/reset.css"
+import "../styles/reset.css";
 
 import Header from './common/Header';
 import List from './List';
@@ -10,13 +10,15 @@ import Success from './Success';
 
 function App() {
     return (
-        <>
+        <BrowserRouter>
             <Header />
-            <List />
-            <Time />
-            <Seats />
-            <Success />
-        </>
+            <Routes>
+                <Route path="/" element={<List />} />
+                <Route path="/sessoes/:idFilme" element={<Time />} />
+                <Route path="/assentos/:idSessao" element={<Seats />} />
+                <Route path="/sucesso" element={<Success />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 

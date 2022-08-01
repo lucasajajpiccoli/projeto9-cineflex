@@ -1,24 +1,49 @@
-import { Fragment } from 'react';
+import { Fragment, useState, useEffect } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 
 import Title from './common/Title';
+import Loading from './common/Loading';
 import Poster from './Poster';
 
 function List () {
-    const lista = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const [movies, setMovies] = useState(null);
+
+    useEffect(() => {
+        const promise = axios.get(
+            "https://mock-api.driven.com.br/api/v7/cineflex/movies"
+        );
+        promise.then(
+            (response) => {
+                setMovies(response.data);
+            }
+        );
+    }, []);
+
+    if (movies === null) {
+        return (
+            <Loading />
+        );
+    }
 
     return (
         <>
             <Title>Selecione o filme</Title>
             <Container>
-            {lista.map((item, index) => <Poster key={index} />)}
+            {movies.map((item, index) => 
+                <Poster
+                    key={index}
+                    source={item.posterURL}
+                    idMovie={item.id}
+                />
+            )}
             </Container>
         </>
     );
 }
 
 const Container = styled.div`
-    margin: 0vw 8vw;
+    margin: 0vw 8vw 20px 8vw;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
