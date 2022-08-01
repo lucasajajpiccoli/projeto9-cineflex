@@ -19,7 +19,8 @@ function List () {
                     setMovies(response.data);
                 }
             );
-        }, []);
+        },
+    []);
 
     if (movies === null) {
         return (

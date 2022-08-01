@@ -23,7 +23,8 @@ function Time() {
                     setSessions(response.data);
                 }
             );
-        }, []);
+        }, 
+    []);
 
     if (sessions === null) {
         return (
@@ -44,7 +45,10 @@ function Time() {
                     />
                 )}
             </Container>
-            <Footer />
+            <Footer
+                title={sessions.title}
+                posterURL={sessions.posterURL}
+            />
         </>
     );
 }

@@ -1,4 +1,6 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import styled from 'styled-components';
 
 import Loading from './common/Loading';
@@ -9,18 +11,53 @@ import Form from './Form';
 import Footer from './common/Footer';
 
 function Seats() {
+    const {idSessao} = useParams();
 
+    const [sessionSeats, setSessionSeats] = useState(null);
+    const [selectedSeats, setSelectedSeats] = useState([]);
+
+    useEffect(
+        () => {
+            const promise = axios.get(
+                `https://mock-api.driven.com.br/api/v7/cineflex/showtimes/${idSessao}/seats`
+            );
+            promise.then(
+                (response) => {
+                    setSessionSeats(response.data);
+                }
+            );
+        },
+    []);
+
+    if (sessionSeats === null) {
+        return (
+            <Loading />
+        );
+    }
     
     return (
         <>
             <Title>{`Selecione o(s) assento(s)`}</Title>
             <Container>
                 <div>
-
+                    {sessionSeats.seats.map((item, index) => 
+                        <Seat
+                            key={index}
+                            position={index}
+                            sessionSeat={item}
+                            selectedSeats={selectedSeats}
+                            setSelectedSeats={setSelectedSeats}
+                        />
+                    )}
                 </div>
                 <Legend />
             </Container>
-            <Footer />
+            <Footer
+               title={sessionSeats.movie.title}
+               posterURL={sessionSeats.movie.posterURL}
+               weekday={sessionSeats.day.weekday}
+               name={sessionSeats.name} 
+            />
         </>
     );
 }
